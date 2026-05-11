@@ -6,6 +6,20 @@ const CONFIG = {
   CURRENCY: "EUR"
 };
 
+function warnIfPlaceholderConfig() {
+  const placeholders = ["replace_me", "test_replace_me"];
+  const configEntries = [
+    ["STRIPE_PAYMENT_LINK", CONFIG.STRIPE_PAYMENT_LINK],
+    ["PAYPAL_PAYMENT_LINK", CONFIG.PAYPAL_PAYMENT_LINK],
+    ["LEAD_ENDPOINT", CONFIG.LEAD_ENDPOINT]
+  ];
+  for (const [key, value] of configEntries) {
+    if (placeholders.some((token) => String(value).includes(token))) {
+      console.warn(`[MVP config] ${key} contiene un placeholder y debe configurarse para producción.`);
+    }
+  }
+}
+
 function track(eventName, payload = {}) {
   const data = {
     event: eventName,
@@ -219,7 +233,9 @@ function initSuccessPage() {
 }
 
 if (window.location.pathname.endsWith("success.html")) {
+  warnIfPlaceholderConfig();
   initSuccessPage();
 } else {
+  warnIfPlaceholderConfig();
   initLanding();
 }

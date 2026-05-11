@@ -13,11 +13,11 @@ Este repositorio ahora incluye una base de lanzamiento para monetizar una oferta
 
 ## Estructura
 
-- `/home/runner/work/MONEYMONEYMONEYMONEY/MONEYMONEYMONEYMONEY/index.html`
-- `/home/runner/work/MONEYMONEYMONEYMONEY/MONEYMONEYMONEYMONEY/success.html`
-- `/home/runner/work/MONEYMONEYMONEYMONEY/MONEYMONEYMONEYMONEY/legal.html`
-- `/home/runner/work/MONEYMONEYMONEYMONEY/MONEYMONEYMONEYMONEY/styles.css`
-- `/home/runner/work/MONEYMONEYMONEYMONEY/MONEYMONEYMONEYMONEY/app.js`
+- `./index.html`
+- `./success.html`
+- `./legal.html`
+- `./styles.css`
+- `./app.js`
 
 ## Puesta en marcha rápida
 
