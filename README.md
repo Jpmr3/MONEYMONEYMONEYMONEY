@@ -1,44 +1,48 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8"><title>SISTEMA DE LIQUIDEZ</title>
-    <style>
-        body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:50px 20px;}
-        .box{border:1px solid #0f0;padding:30px;border-radius:10px;max-width:400px;margin:auto;box-shadow:0 0 20px #0f0;}
-        .btn{background:#0f0;color:#000;padding:15px;width:100%;border:none;font-weight:bold;cursor:pointer;margin-top:20px;border-radius:5px;}
-        .bar{background:#222;height:10px;margin:20px 0;border-radius:5px;overflow:hidden;}
-        .fill{background:#0f0;height:100%;width:0%;transition:0.5s;}
-    </style>
-</head>
-<body>
-    <div class="box">
-        <h2>NODO DE PAGO #4192</h2>
-        <h1 id="money">€0.00</h1>
-        <p>Estado: <span style="color:yellow">Esperando Validación Viral</span></p>
-        
-        <div class="bar"><div class="fill" id="fill"></div></div>
-        
-        <button class="btn" id="btn-share" onclick="compartir()">PASO 1: ACTIVAR VIRALIDAD</button>
-        <button class="btn" id="btn-claim" style="display:none;background:cyan" onclick="cobrar()">PASO 2: RETIRAR A CUENTA</button>
-    </div>
+# MVP de monetización real (legal y ejecutable)
 
-    <script>
-        // PEGA TU LINK DE ADSTERRA AQUÍ ABAJO
-        const MI_LINK_DE_COBRO = "AQUÍ_PEGA_TU_LINK_DE_ADSTERRA";
+Este repositorio ahora incluye una base de lanzamiento para monetizar una oferta digital con:
 
-        let cash = 0;
-        setInterval(() => { cash += 1.55; document.getElementById('money').innerText = "€" + cash.toFixed(2); }, 1000);
+- Landing de conversión
+- Checkout real por enlace (Stripe/PayPal)
+- Página de éxito post-compra
+- Captación de leads
+- Tracking de embudo
+- Consentimiento de cookies
+- Páginas legales
+- Plantillas de automatización (email/WhatsApp)
 
-        function compartir() {
-            window.open("https://api.whatsapp.com/send?text=Mira%20esto,%20están%20pagando%20por%20entrar:%20" + window.location.href);
-            document.getElementById('fill').style.width = "100%";
-            document.getElementById('btn-share').style.display = "none";
-            document.getElementById('btn-claim').style.display = "block";
-        }
+## Estructura
 
-        function cobrar() {
-            window.location.href = MI_LINK_DE_COBRO;
-        }
-    </script>
-</body>
-</html>
+- `./index.html`
+- `./success.html`
+- `./legal.html`
+- `./styles.css`
+- `./app.js`
+
+## Puesta en marcha rápida
+
+1. Edita `app.js` y configura:
+   - `STRIPE_PAYMENT_LINK`
+   - `STRIPE_REFERENCE_PARAM` (por defecto `client_reference_id`, propio de Stripe)
+   - `PAYPAL_PAYMENT_LINK`
+   - `LEAD_ENDPOINT`
+   - `WHATSAPP_TEMPLATE` y `EMAIL_TEMPLATE`
+   - Importante: reemplaza todos los placeholders `replace_me`/`test_replace_me` por enlaces reales de producción antes de publicar.
+2. Publica en hosting estático (GitHub Pages, Netlify, Vercel, etc.).
+3. Usa campañas con UTM (`utm_source`, `utm_campaign`, `utm_content`) para medir.
+4. Redirige tu pasarela de pago a:
+   - `success.html?provider=stripe&status=success`
+   - o `success.html?provider=paypal&status=success`
+
+## Métricas clave incluidas
+
+- `page_view`
+- `lead_submit`
+- `checkout_click`
+- `purchase_success`
+- `cookie_consent_accepted`
+- `ab_variant_assigned`
+
+## Nota importante
+
+No se garantiza facturación ni resultados “instantáneos”. Este MVP implementa infraestructura comercial realista para validar oferta, captar demanda y escalar en función de datos.

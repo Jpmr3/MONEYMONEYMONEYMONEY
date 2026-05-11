@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compra confirmada</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>✅ Compra recibida</h1>
+    <p id="purchase-message">Estamos validando los detalles de tu pago.</p>
+
+    <section class="card">
+      <h2>Siguiente paso</h2>
+      <p>Envía este mensaje por WhatsApp para activar tu entrega:</p>
+      <pre id="wa-template">Hola, ya hice la compra del servicio. Comparto comprobante y espero siguientes pasos.</pre>
+      <button id="copy-wa" class="btn secondary">Copiar mensaje WhatsApp</button>
+    </section>
+
+    <section class="card">
+      <h2>Email de bienvenida sugerido</h2>
+      <pre id="email-template">Asunto: Bienvenida y activación de tu servicio
+
+Gracias por tu compra.
+En las próximas 24h te enviaremos formulario inicial y fecha de ejecución.
+Soporte: responde a este correo o WhatsApp.</pre>
+      <button id="copy-email" class="btn secondary">Copiar plantilla email</button>
+    </section>
+
+    <section class="card">
+      <h2>Registro local de transacciones</h2>
+      <p>Este MVP guarda un registro local para control básico en navegador.</p>
+      <pre id="transactions-log">[]</pre>
+    </section>
+
+    <a href="./index.html" class="link">Volver a la landing</a>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

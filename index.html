@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MVP Comercial | Oferta Digital</title>
+  <meta name="description" content="Landing de conversión con checkout real, tracking y cumplimiento legal.">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="container">
+    <p class="badge">Lanzamiento MVP</p>
+    <h1 id="headline">Servicio Express para transformar tu presencia digital en ventas en 7 días</h1>
+    <p class="lead">
+      Oferta inicial de implementación digital con entrega rápida, soporte por WhatsApp y garantía simple.
+    </p>
+    <div class="price-box">
+      <strong>Precio de lanzamiento: 49€</strong>
+      <span>Garantía 7 días: si no encaja, devolución.</span>
+    </div>
+    <div class="cta-row">
+      <button id="buy-stripe" class="btn primary">Comprar ahora (Stripe)</button>
+      <button id="buy-paypal" class="btn secondary">Comprar ahora (PayPal)</button>
+    </div>
+    <p class="note">Pago seguro mediante proveedor externo.</p>
+  </header>
+
+  <main class="container sections">
+    <section class="card">
+      <h2>Qué incluye</h2>
+      <ul>
+        <li>Diagnóstico express + plan accionable</li>
+        <li>Activos de captación listos para publicar</li>
+        <li>Embudo mínimo de seguimiento</li>
+        <li>Sesión de entrega y activación</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Captación de leads</h2>
+      <form id="lead-form">
+        <label for="name">Nombre</label>
+        <input id="name" name="name" required>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required>
+        <label for="phone">WhatsApp (opcional)</label>
+        <input id="phone" name="phone" type="tel">
+        <button class="btn primary" type="submit">Quiero información</button>
+      </form>
+      <p id="lead-status" class="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>Pruebas A/B activas</h2>
+      <p>Esta landing asigna variante de mensaje automáticamente para optimizar conversión.</p>
+      <p><strong>Variante:</strong> <span id="ab-variant">-</span></p>
+    </section>
+
+    <section class="card">
+      <h2>Automatización mínima lista</h2>
+      <ul>
+        <li>Plantilla de email post-registro</li>
+        <li>Plantilla de WhatsApp post-compra</li>
+        <li>Secuencia básica de recuperación</li>
+      </ul>
+      <a href="./success.html" class="link">Ver ejemplo de secuencia en página de éxito</a>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <a href="./legal.html">Aviso legal, privacidad y términos</a>
+  </footer>
+
+  <div id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-label="Consentimiento de cookies">
+    <p>Usamos cookies de analítica para medir rendimiento comercial.</p>
+    <button id="accept-cookies" class="btn primary">Aceptar</button>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
