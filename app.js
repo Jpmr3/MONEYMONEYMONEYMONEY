@@ -1,7 +1,15 @@
 const CONFIG = {
   STRIPE_PAYMENT_LINK: "https://buy.stripe.com/test_replace_me",
+  STRIPE_REFERENCE_PARAM: "client_reference_id",
   PAYPAL_PAYMENT_LINK: "https://www.paypal.com/paypalme/replace_me",
   LEAD_ENDPOINT: "https://formspree.io/f/replace_me",
+  WHATSAPP_TEMPLATE:
+    "Hola, ya hice la compra del servicio. Comparto comprobante y espero siguientes pasos.",
+  EMAIL_TEMPLATE: `Asunto: Bienvenida y activación de tu servicio
+
+Gracias por tu compra.
+En las próximas 24h te enviaremos formulario inicial y fecha de ejecución.
+Soporte: responde a este correo o WhatsApp.`,
   PRICE: 49,
   CURRENCY: "EUR"
 };
@@ -158,7 +166,7 @@ function initCheckoutButtons() {
         return;
       }
       const tx = registerCheckoutIntent("stripe");
-      url.searchParams.set("client_reference_id", tx.id);
+      url.searchParams.set(CONFIG.STRIPE_REFERENCE_PARAM, tx.id);
       window.location.href = url.toString();
     });
   }
@@ -223,6 +231,8 @@ function initSuccessPage() {
   const emailButton = document.getElementById("copy-email");
   const waTemplate = document.getElementById("wa-template");
   const emailTemplate = document.getElementById("email-template");
+  if (waTemplate) waTemplate.textContent = CONFIG.WHATSAPP_TEMPLATE;
+  if (emailTemplate) emailTemplate.textContent = CONFIG.EMAIL_TEMPLATE;
 
   async function copyWithFeedback(text, button) {
     if (!button) return;

@@ -23,8 +23,10 @@ Este repositorio ahora incluye una base de lanzamiento para monetizar una oferta
 
 1. Edita `app.js` y configura:
    - `STRIPE_PAYMENT_LINK`
+   - `STRIPE_REFERENCE_PARAM` (por defecto `client_reference_id`, propio de Stripe)
    - `PAYPAL_PAYMENT_LINK`
    - `LEAD_ENDPOINT`
+   - `WHATSAPP_TEMPLATE` y `EMAIL_TEMPLATE`
    - Importante: reemplaza todos los placeholders `replace_me`/`test_replace_me` por enlaces reales de producción antes de publicar.
 2. Publica en hosting estático (GitHub Pages, Netlify, Vercel, etc.).
 3. Usa campañas con UTM (`utm_source`, `utm_campaign`, `utm_content`) para medir.
