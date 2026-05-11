@@ -7,16 +7,29 @@ const CONFIG = {
 };
 
 function warnIfPlaceholderConfig() {
-  const placeholders = ["replace_me", "test_replace_me"];
   const configEntries = [
     ["STRIPE_PAYMENT_LINK", CONFIG.STRIPE_PAYMENT_LINK],
     ["PAYPAL_PAYMENT_LINK", CONFIG.PAYPAL_PAYMENT_LINK],
     ["LEAD_ENDPOINT", CONFIG.LEAD_ENDPOINT]
   ];
   for (const [key, value] of configEntries) {
-    if (placeholders.some((token) => String(value).includes(token))) {
+    if (isPlaceholderValue(value)) {
       console.warn(`[MVP config] ${key} contiene un placeholder y debe configurarse para producción.`);
     }
+  }
+}
+
+function isPlaceholderValue(value) {
+  const placeholders = ["replace_me", "test_replace_me"];
+  return placeholders.some((token) => String(value).includes(token));
+}
+
+function resolveCheckoutUrl(rawUrl) {
+  if (isPlaceholderValue(rawUrl)) return null;
+  try {
+    return new URL(rawUrl);
+  } catch {
+    return null;
   }
 }
 
@@ -139,8 +152,12 @@ function initCheckoutButtons() {
 
   if (stripe) {
     stripe.addEventListener("click", () => {
+      const url = resolveCheckoutUrl(CONFIG.STRIPE_PAYMENT_LINK);
+      if (!url) {
+        alert("Checkout Stripe no configurado. Actualiza STRIPE_PAYMENT_LINK en app.js.");
+        return;
+      }
       const tx = registerCheckoutIntent("stripe");
-      const url = new URL(CONFIG.STRIPE_PAYMENT_LINK);
       url.searchParams.set("client_reference_id", tx.id);
       window.location.href = url.toString();
     });
@@ -148,6 +165,10 @@ function initCheckoutButtons() {
 
   if (paypal) {
     paypal.addEventListener("click", () => {
+      if (!resolveCheckoutUrl(CONFIG.PAYPAL_PAYMENT_LINK)) {
+        alert("Checkout PayPal no configurado. Actualiza PAYPAL_PAYMENT_LINK en app.js.");
+        return;
+      }
       registerCheckoutIntent("paypal");
       window.location.href = CONFIG.PAYPAL_PAYMENT_LINK;
     });
