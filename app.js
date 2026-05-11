@@ -276,18 +276,18 @@ function initCountdown() {
 // ─── Dynamic spots counter ─────────────────────────────────────────────────────
 
 function getSpots() {
-  let spots = parseInt(localStorage.getItem("spots_remaining") || "0", 10);
-  if (!spots || spots < 1) {
-    spots = CONFIG.INITIAL_SPOTS;
-    localStorage.setItem("spots_remaining", String(spots));
+  const stored = localStorage.getItem("spots_remaining");
+  if (stored === null) {
+    // First visit — initialize
+    localStorage.setItem("spots_remaining", String(CONFIG.INITIAL_SPOTS));
     localStorage.setItem("spots_ts", String(Date.now()));
+    return CONFIG.INITIAL_SPOTS;
   }
-  // Decrease 1 spot every SPOTS_DECREASE_HOURS elapsed
+  const spots = parseInt(stored, 10);
   const ts = parseInt(localStorage.getItem("spots_ts") || String(Date.now()), 10);
   const hoursElapsed = (Date.now() - ts) / 3600000;
   const decrease = Math.floor(hoursElapsed / CONFIG.SPOTS_DECREASE_HOURS);
-  const current = Math.max(1, spots - decrease);
-  return current;
+  return Math.max(1, spots - decrease);
 }
 
 function initSpotsCounter() {
@@ -427,6 +427,9 @@ function initLanding() {
   initCookieConsent();
   initLeadForm();
   initCheckoutButtons();
+  initLiveViewers();
+  initPurchaseToasts();
+  initAnimatedCounters();
   track("page_view", { variant: variantIndex, ...utm });
 }
 
@@ -542,6 +545,108 @@ function initSuccessPage() {
   initCountdown();
 }
 
+// ─── Live viewer simulation ────────────────────────────────────────────────────
+
+function initLiveViewers() {
+  const el = document.getElementById("live-count");
+  if (!el) return;
+  function randomViewers() { return Math.floor(Math.random() * 10) + 4; } // 4–13
+  let current = randomViewers();
+  el.textContent = String(current);
+  setInterval(() => {
+    const delta = Math.random() < 0.5 ? 1 : -1;
+    current = Math.max(3, Math.min(18, current + delta));
+    el.textContent = String(current);
+  }, Math.floor(Math.random() * 15000) + 20000); // every 20–35 s
+}
+
+// ─── Recent purchase toast notifications ──────────────────────────────────────
+
+const TOAST_NAMES = [
+  "Carlos (Madrid)", "Ana (Barcelona)", "David (Valencia)", "Laura (Sevilla)",
+  "Miguel (Bilbao)", "Sofía (Málaga)", "Pablo (Zaragoza)", "Elena (Murcia)",
+  "Javier (Córdoba)", "María (Valladolid)", "Roberto (Alicante)", "Lucía (Vigo)"
+];
+// TOAST_PLANS weights: Express appears 3× (75 %) vs Pro 1× (25 %)
+const TOAST_PLANS = ["Express", "Express", "Express", "Pro"];
+
+function showPurchaseToast(container) {
+  const name = TOAST_NAMES[Math.floor(Math.random() * TOAST_NAMES.length)];
+  const plan = TOAST_PLANS[Math.floor(Math.random() * TOAST_PLANS.length)];
+  const price = plan === "Pro" ? "147 €" : "49 €";
+  const toast = document.createElement("div");
+  toast.className = "purchase-toast";
+  toast.innerHTML = `🛒 <div><strong>${name}</strong><br><span>acaba de comprar plan ${plan} — ${price}</span></div>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add("hiding");
+    setTimeout(() => { if (toast.parentNode) toast.remove(); }, 350);
+  }, 5000);
+}
+
+function initPurchaseToasts() {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+  // First toast after 8–15 s, then each subsequent toast uses a fresh random delay
+  function scheduleNext() {
+    const delay = Math.floor(Math.random() * 45000) + 45000; // 45–90 s
+    setTimeout(() => { showPurchaseToast(container); scheduleNext(); }, delay);
+  }
+  setTimeout(() => { showPurchaseToast(container); scheduleNext(); }, Math.floor(Math.random() * 7000) + 8000);
+}
+
+// ─── Animated social proof counters ───────────────────────────────────────────
+
+function animateCounter(el, target, duration) {
+  const isPlus = String(target).includes("+");
+  const raw = parseInt(String(target).replace(/\D/g, ""), 10);
+  const suffix = isPlus ? "+" : "";
+  let start = null;
+  function step(ts) {
+    if (!start) start = ts;
+    const progress = Math.min((ts - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const value = Math.floor(eased * raw);
+    el.textContent = value + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function initAnimatedCounters() {
+  const spClients = document.getElementById("sp-clients");
+  const spRevenue = document.getElementById("sp-revenue");
+  if (!spClients && !spRevenue) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      if (entry.target === spClients) {
+        animateCounter(spClients, CONFIG.SOCIAL_PROOF_CLIENTS, 1200);
+      }
+      if (entry.target === spRevenue) {
+        // Animate revenue number separately
+        const raw = parseInt(CONFIG.SOCIAL_PROOF_REVENUE.replace(/\D/g, ""), 10);
+        let start = null;
+        const el = spRevenue;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / 1600, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.floor(eased * raw);
+          el.textContent = val.toLocaleString("es-ES") + " €";
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  if (spClients) observer.observe(spClients);
+  if (spRevenue) observer.observe(spRevenue);
+}
+
 if (window.location.pathname.endsWith("success.html")) {
   warnIfPlaceholderConfig();
   initSuccessPage();
@@ -549,3 +654,4 @@ if (window.location.pathname.endsWith("success.html")) {
   warnIfPlaceholderConfig();
   initLanding();
 }
+

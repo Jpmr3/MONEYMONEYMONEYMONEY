@@ -5,13 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Implementación Comercial Express — Empieza a vender en 7 días</title>
   <meta name="description" content="Sistema de ventas digital real listo en 7 días. Checkout, captación de leads y seguimiento automatizado desde el primer día. Garantía total.">
+  <link rel="canonical" href="https://jpmr3.github.io/MONEYMONEYMONEYMONEY/">
   <meta property="og:title" content="Implementación Comercial Express — Empieza a vender en 7 días">
   <meta property="og:description" content="De 0 a tu primera venta online en 7 días. Garantizado o devolvemos. Plazas limitadas.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jpmr3.github.io/MONEYMONEYMONEYMONEY/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Implementación Comercial Express">
   <meta name="twitter:description" content="Sistema de ventas digital real. Resultados en 7 días o devolución.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "name": "Implementación Comercial Express",
+        "description": "Sistema de ventas digital completo: landing, checkout, captación de leads y seguimiento automatizado. Operativo en 7 días.",
+        "offers": {
+          "@type": "Offer",
+          "price": "49",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/LimitedAvailability",
+          "priceValidUntil": "2026-12-31"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "47"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿En cuánto tiempo veré resultados?",
+            "acceptedAnswer": { "@type": "Answer", "text": "El sistema queda operativo en 7 días. Las primeras ventas dependen de tu audiencia y tráfico, pero la infraestructura estará lista para captar desde el primer día." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Necesito conocimientos técnicos?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Nosotros configuramos todo. Tú solo necesitas seguir el plan de acción y ejecutar las acciones de captación de clientes." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si no me funciona?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tienes 7 días de garantía total. Si el sistema no cumple lo prometido, te devolvemos el dinero sin preguntas ni burocracia." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es una suscripción o pago único?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Pago único. Sin renovaciones, sin sorpresas. Pagas una vez y el sistema es tuyo." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -40,11 +94,21 @@
       <span class="guarantee">🛡️ Garantía 7 días — devolución sin preguntas si no es para ti</span>
     </div>
 
+    <div class="live-viewers"><span class="live-dot"></span><span id="live-count">8</span> personas viendo esto ahora</div>
+
     <div class="cta-row">
       <button id="buy-stripe" class="btn primary pulse">💳 Comprar ahora — 49 €</button>
       <button id="buy-paypal" class="btn secondary">🅿️ Pagar con PayPal</button>
     </div>
     <p class="note">🔒 Pago 100 % seguro · SSL · Stripe / PayPal certificados</p>
+
+    <div class="trust-bar">
+      <span class="trust-item">🔐 SSL 256‑bit</span>
+      <span class="trust-item">💳 Stripe Certified</span>
+      <span class="trust-item">🅿️ PayPal Verified</span>
+      <span class="trust-item">🛡️ Garantía 7 días</span>
+      <span class="trust-item">🇪🇺 RGPD Compliant</span>
+    </div>
   </header>
 
   <main class="container sections">
@@ -200,6 +264,33 @@
       </div>
     </section>
 
+    <!-- Comparison: DIY vs Express -->
+    <section class="card full-width">
+      <h2>¿Por qué no hacerlo tú solo?</h2>
+      <div class="comparison-grid">
+        <div class="comparison-col bad">
+          <h3>❌ Hacerlo solo</h3>
+          <ul class="comparison-list">
+            <li>2–4 semanas de configuración</li>
+            <li>500–2 000 € en herramientas / freelancers</li>
+            <li>Curva de aprendizaje técnico</li>
+            <li>Sin sistema de seguimiento</li>
+            <li>Sin estrategia de conversión probada</li>
+          </ul>
+        </div>
+        <div class="comparison-col good">
+          <h3>✅ Sistema Express</h3>
+          <ul class="comparison-list">
+            <li>Operativo en <strong>7 días</strong></li>
+            <li>Solo <strong>49 €</strong> pago único</li>
+            <li>Cero conocimientos técnicos</li>
+            <li>Tracking de embudo incluido</li>
+            <li>Estructura de ventas ya optimizada</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- A/B info (hidden from users, useful for admin) -->
     <section class="card hidden" aria-hidden="true">
       <p><small>Variante A/B activa: <span id="ab-variant">-</span></small></p>
@@ -237,6 +328,9 @@
       <button id="reject-cookies" class="btn-link">Solo esenciales</button>
     </div>
   </div>
+
+  <!-- Purchase toast notifications -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
 
   <script src="./app.js"></script>
 </body>
