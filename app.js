@@ -28,8 +28,16 @@ function warnIfPlaceholderConfig() {
 }
 
 function isPlaceholderValue(value) {
-  const placeholders = ["replace_me", "test_replace_me"];
-  return placeholders.some((token) => String(value).includes(token));
+  const asString = String(value);
+  if (asString === "https://buy.stripe.com/test_replace_me") return true;
+  if (asString === "https://www.paypal.com/paypalme/replace_me") return true;
+  if (asString === "https://formspree.io/f/replace_me") return true;
+  try {
+    const parsed = new URL(asString);
+    return parsed.pathname.endsWith("/replace_me") || parsed.pathname.endsWith("/test_replace_me");
+  } catch {
+    return false;
+  }
 }
 
 function resolveCheckoutUrl(rawUrl) {
@@ -162,7 +170,7 @@ function initCheckoutButtons() {
     stripe.addEventListener("click", () => {
       const url = resolveCheckoutUrl(CONFIG.STRIPE_PAYMENT_LINK);
       if (!url) {
-        alert("Checkout Stripe no configurado. Actualiza STRIPE_PAYMENT_LINK en app.js.");
+        alert("El sistema de pago Stripe no está disponible en este momento. Contacta con soporte.");
         return;
       }
       const tx = registerCheckoutIntent("stripe");
@@ -174,7 +182,7 @@ function initCheckoutButtons() {
   if (paypal) {
     paypal.addEventListener("click", () => {
       if (!resolveCheckoutUrl(CONFIG.PAYPAL_PAYMENT_LINK)) {
-        alert("Checkout PayPal no configurado. Actualiza PAYPAL_PAYMENT_LINK en app.js.");
+        alert("El sistema de pago PayPal no está disponible en este momento. Contacta con soporte.");
         return;
       }
       registerCheckoutIntent("paypal");
