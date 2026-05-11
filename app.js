@@ -17,7 +17,11 @@ Soporte: responde a este correo o WhatsApp.`,
   CURRENCY: "EUR",
   URGENCY_HOURS: 72,     // horas de countdown desde primera visita
   INITIAL_SPOTS: 10,     // plazas visibles al inicio
+  SPOTS_DECREASE_HOURS: 8, // horas entre cada reducción de plaza visible
   REFERRAL_PARAM: "ref", // parámetro URL para tracking de referidos
+  REFERRAL_SHARE_MESSAGE: "🚀 Transformé mi negocio con este sistema de ventas. Consíguelo aquí: {link}",
+  SOCIAL_PROOF_CLIENTS: "47+",
+  SOCIAL_PROOF_REVENUE: "38 000 €",
   AB_VARIANTS: [
     "Lanza tu sistema de ventas digital y empieza a facturar en 7 días",
     "Implementación Comercial Express: estructura de ventas real en 7 días",
@@ -278,10 +282,10 @@ function getSpots() {
     localStorage.setItem("spots_remaining", String(spots));
     localStorage.setItem("spots_ts", String(Date.now()));
   }
-  // Decrease 1 spot every 8 hours elapsed
+  // Decrease 1 spot every SPOTS_DECREASE_HOURS elapsed
   const ts = parseInt(localStorage.getItem("spots_ts") || String(Date.now()), 10);
   const hoursElapsed = (Date.now() - ts) / 3600000;
-  const decrease = Math.floor(hoursElapsed / 8);
+  const decrease = Math.floor(hoursElapsed / CONFIG.SPOTS_DECREASE_HOURS);
   const current = Math.max(1, spots - decrease);
   return current;
 }
@@ -409,6 +413,11 @@ function initLanding() {
   setHeadlineByVariant(variantIndex);
   const variantNode = document.getElementById("ab-variant");
   if (variantNode) variantNode.textContent = variantIndex;
+  // Dynamic social proof from CONFIG
+  const spClients = document.getElementById("sp-clients");
+  const spRevenue = document.getElementById("sp-revenue");
+  if (spClients) spClients.textContent = CONFIG.SOCIAL_PROOF_CLIENTS;
+  if (spRevenue) spRevenue.textContent = CONFIG.SOCIAL_PROOF_REVENUE;
   initCountdown();
   initSpotsCounter();
   initStickyBar();
@@ -504,7 +513,7 @@ function initSuccessPage() {
     }
     const refShare = document.getElementById("share-wa-referral");
     if (refShare) {
-      const shareMsg = `🚀 Transformé mi negocio con este sistema de ventas. Consíguelo aquí: ${refLink}`;
+      const shareMsg = CONFIG.REFERRAL_SHARE_MESSAGE.replace("{link}", refLink);
       const waUrl = getDirectWhatsAppUrl(shareMsg);
       if (waUrl) {
         refShare.href = waUrl;
