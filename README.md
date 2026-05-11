@@ -1,5 +1,9 @@
 # Sistema de Monetización Express 2026
 
+[![Deploy to GitHub Pages](https://github.com/Jpmr3/MONEYMONEYMONEYMONEY/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jpmr3/MONEYMONEYMONEYMONEY/actions/workflows/deploy.yml)
+
+🌐 **URL en vivo:** [https://jpmr3.github.io/MONEYMONEYMONEYMONEY/](https://jpmr3.github.io/MONEYMONEYMONEYMONEY/)
+
 Sistema de ventas digital de alto rendimiento listo para publicar. Diseñado para generar ingresos lo antes posible y crecer de forma exponencial.
 
 ## Qué incluye
@@ -55,11 +59,18 @@ Edita el objeto `CONFIG` al inicio del archivo:
 
 ### 3. Publica en hosting estático
 
+#### Opción A — GitHub Pages (automático, ya configurado)
+
+Este repositorio ya incluye un workflow de GitHub Actions (`.github/workflows/deploy.yml`).
+
+1. Ve a **Settings → Pages** en tu repositorio de GitHub.
+2. En **Source**, selecciona **GitHub Actions**.
+3. Haz push a `main` — el sitio se desplegará automáticamente en `https://jpmr3.github.io/MONEYMONEYMONEYMONEY/`.
+
+#### Opción B — Netlify (60 segundos)
+
 ```bash
-# GitHub Pages, Netlify, Vercel — sube los archivos y listo
-# Opción más rápida con Netlify:
-# 1. Arrastra la carpeta a app.netlify.com/drop
-# 2. Tu sitio estará live en 60 segundos
+# Arrastra la carpeta a app.netlify.com/drop y listo
 ```
 
 ### 4. Configura tus pasarelas de pago
