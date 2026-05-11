@@ -3,39 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Compra confirmada</title>
+  <title>✅ Compra confirmada — Próximos pasos</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+
   <main class="container">
-    <h1>✅ Compra recibida</h1>
-    <p id="purchase-message">Estamos validando los detalles de tu pago.</p>
+    <div class="success-header">
+      <div class="success-icon">🎉</div>
+      <h1>¡Compra recibida!</h1>
+      <p id="purchase-message">Estamos validando los detalles de tu pago…</p>
+    </div>
 
-    <section class="card">
-      <h2>Siguiente paso</h2>
-      <p>Envía este mensaje por WhatsApp para activar tu entrega:</p>
-      <pre id="wa-template">Hola, ya hice la compra del servicio. Comparto comprobante y espero siguientes pasos.</pre>
-      <button id="copy-wa" class="btn secondary">Copiar mensaje WhatsApp</button>
-    </section>
+    <div class="sections">
 
-    <section class="card">
-      <h2>Email de bienvenida sugerido</h2>
-      <pre id="email-template">Asunto: Bienvenida y activación de tu servicio
+      <!-- Next steps -->
+      <section class="card full-width">
+        <h2>📋 Próximos pasos</h2>
+        <ol class="steps-list">
+          <li>Revisa tu email — en menos de 1 h recibirás la confirmación y el formulario de inicio.</li>
+          <li>Envíanos un WhatsApp con tu comprobante para activar tu servicio en &lt; 24 h.</li>
+          <li>Prepara 45 min para la sesión de activación 1:1 (te enviaremos el enlace).</li>
+        </ol>
+      </section>
+
+      <!-- Direct WhatsApp + copy template -->
+      <section class="card">
+        <h2>💬 Activa tu servicio por WhatsApp</h2>
+        <p>Haz clic para abrir WhatsApp con el mensaje ya preparado:</p>
+        <a id="wa-direct" href="#" class="btn primary full-btn hidden" target="_blank" rel="noopener noreferrer">
+          📲 Abrir WhatsApp ahora
+        </a>
+        <details class="mt-8">
+          <summary class="link" style="cursor:pointer">Ver / copiar mensaje manualmente</summary>
+          <pre id="wa-template">Hola, ya hice la compra del servicio. Comparto comprobante y espero siguientes pasos.</pre>
+          <button id="copy-wa" class="btn secondary">Copiar mensaje WhatsApp</button>
+        </details>
+      </section>
+
+      <!-- Email template -->
+      <section class="card">
+        <h2>📧 Email de bienvenida (plantilla)</h2>
+        <pre id="email-template">Asunto: Bienvenida y activación de tu servicio
 
 Gracias por tu compra.
 En las próximas 24h te enviaremos formulario inicial y fecha de ejecución.
 Soporte: responde a este correo o WhatsApp.</pre>
-      <button id="copy-email" class="btn secondary">Copiar plantilla email</button>
-    </section>
+        <button id="copy-email" class="btn secondary">Copiar plantilla email</button>
+      </section>
 
-    <section class="card">
-      <h2>Registro local de transacciones</h2>
-      <p>Este MVP guarda un registro local para control básico en navegador.</p>
-      <pre id="transactions-log">[]</pre>
-    </section>
+      <!-- Referral program -->
+      <section class="card full-width hidden" id="referral-section">
+        <h2>🔗 Gana dinero refiriendo amigos</h2>
+        <p>Comparte tu enlace exclusivo. Por cada amigo que compre, <strong>recibes una comisión directa</strong>.</p>
+        <pre id="referral-link" class="referral-link-box">Generando tu enlace…</pre>
+        <div class="cta-row">
+          <button id="copy-referral" class="btn primary">Copiar mi enlace de referido</button>
+          <a id="share-wa-referral" href="#" class="btn secondary hidden" target="_blank" rel="noopener noreferrer">
+            📲 Compartir por WhatsApp
+          </a>
+        </div>
+        <p class="note">El seguimiento de referidos se hace automáticamente al usar tu enlace.</p>
+      </section>
 
-    <a href="./index.html" class="link">Volver a la landing</a>
+      <!-- Upsell Pro -->
+      <section class="card full-width hidden" id="upsell-section">
+        <div class="upsell-box">
+          <p class="badge">Oferta exclusiva para clientes — solo hoy</p>
+          <h2>¿Quieres multiplicar tus resultados?</h2>
+          <p>Actualiza al plan <strong>Pro</strong> ahora por solo <strong>98 € más</strong> (precio total: 147 €, ahorro vs. comprar separado: 150 €). Incluye estrategia de tráfico, 3 variantes A/B, funnel completo y 30 días de soporte prioritario.</p>
+          <p class="countdown-label">Esta oferta caduca en: <strong id="countdown-success">--:--:--</strong></p>
+          <button id="upsell-buy" class="btn pro-btn">⚡ Actualizar al Plan Pro — +98 €</button>
+        </div>
+      </section>
+
+      <!-- Transaction log -->
+      <section class="card full-width">
+        <h2>🗒️ Registro de transacciones (local)</h2>
+        <p class="note">Guardado en tu navegador para control básico.</p>
+        <pre id="transactions-log">[]</pre>
+      </section>
+
+    </div>
+
+    <a href="./index.html" class="link">← Volver a la landing</a>
   </main>
+
   <script src="./app.js"></script>
 </body>
 </html>
