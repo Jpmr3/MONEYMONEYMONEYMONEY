@@ -189,14 +189,31 @@ function initSuccessPage() {
   const waTemplate = document.getElementById("wa-template");
   const emailTemplate = document.getElementById("email-template");
 
+  async function copyWithFeedback(text, button) {
+    if (!button) return;
+    const original = button.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "Copiado ✅";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1200);
+    } catch {
+      button.textContent = "No se pudo copiar";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1500);
+    }
+  }
+
   if (waButton && waTemplate) {
-    waButton.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(waTemplate.textContent || "");
+    waButton.addEventListener("click", () => {
+      copyWithFeedback(waTemplate.textContent || "", waButton);
     });
   }
   if (emailButton && emailTemplate) {
-    emailButton.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(emailTemplate.textContent || "");
+    emailButton.addEventListener("click", () => {
+      copyWithFeedback(emailTemplate.textContent || "", emailButton);
     });
   }
 }
