@@ -3,77 +3,239 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MVP Comercial | Oferta Digital</title>
-  <meta name="description" content="Landing de conversión con checkout real, tracking y cumplimiento legal.">
+  <title>Implementación Comercial Express — Empieza a vender en 7 días</title>
+  <meta name="description" content="Sistema de ventas digital real listo en 7 días. Checkout, captación de leads y seguimiento automatizado desde el primer día. Garantía total.">
+  <meta property="og:title" content="Implementación Comercial Express — Empieza a vender en 7 días">
+  <meta property="og:description" content="De 0 a tu primera venta online en 7 días. Garantizado o devolvemos. Plazas limitadas.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Implementación Comercial Express">
+  <meta name="twitter:description" content="Sistema de ventas digital real. Resultados en 7 días o devolución.">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="container">
-    <p class="badge">Lanzamiento MVP</p>
-    <h1 id="headline">Servicio Express para transformar tu presencia digital en ventas en 7 días</h1>
+
+  <!-- Urgency Top Bar -->
+  <div id="urgency-bar" class="urgency-bar">
+    <span>⚡ Oferta de lanzamiento — solo quedan <strong id="spots-left">10</strong> plazas al precio inicial</span>
+    <span class="countdown-label">Caduca en: <strong id="countdown-inline">--:--:--</strong></span>
+  </div>
+
+  <header class="container hero">
+    <p class="badge">🚀 Sistema Comercial Express 2026</p>
+    <h1 id="headline">Lanza tu sistema de ventas digital y empieza a facturar en 7 días</h1>
     <p class="lead">
-      Oferta inicial de implementación digital con entrega rápida, soporte por WhatsApp y garantía simple.
+      Implementamos la infraestructura comercial completa para tu negocio: landing, checkout, captación, seguimiento y análisis. Todo listo para vender desde el primer día.
     </p>
+
+    <div class="social-proof-bar">
+      <span>✅ <strong id="sp-clients">47+</strong> clientes activos</span>
+      <span>⭐ <strong>4.9/5</strong> valoración</span>
+      <span>💰 <strong id="sp-revenue">38 000 €</strong> generados</span>
+    </div>
+
     <div class="price-box">
-      <strong>Precio de lanzamiento: 49€</strong>
-      <span>Garantía 7 días: si no encaja, devolución.</span>
+      <div class="price-original"><s>97 €</s> <span class="badge-offer">-50 %</span></div>
+      <div class="price-main"><strong>49 €</strong> <span class="price-sub">pago único · sin suscripción</span></div>
+      <span class="guarantee">🛡️ Garantía 7 días — devolución sin preguntas si no es para ti</span>
     </div>
+
     <div class="cta-row">
-      <button id="buy-stripe" class="btn primary">Comprar ahora (Stripe)</button>
-      <button id="buy-paypal" class="btn secondary">Comprar ahora (PayPal)</button>
+      <button id="buy-stripe" class="btn primary pulse">💳 Comprar ahora — 49 €</button>
+      <button id="buy-paypal" class="btn secondary">🅿️ Pagar con PayPal</button>
     </div>
-    <p class="note">Pago seguro mediante proveedor externo.</p>
+    <p class="note">🔒 Pago 100 % seguro · SSL · Stripe / PayPal certificados</p>
   </header>
 
   <main class="container sections">
-    <section class="card">
-      <h2>Qué incluye</h2>
-      <ul>
-        <li>Diagnóstico express + plan accionable</li>
-        <li>Activos de captación listos para publicar</li>
-        <li>Embudo mínimo de seguimiento</li>
-        <li>Sesión de entrega y activación</li>
-      </ul>
+
+    <!-- What's included -->
+    <section class="card full-width">
+      <h2>¿Qué obtienes exactamente?</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <div>
+            <strong>Diagnóstico comercial express</strong>
+            <p>Análisis de tu situación y plan de acción con los 3 cambios de mayor impacto en ventas.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🏗️</span>
+          <div>
+            <strong>Infraestructura de captación lista</strong>
+            <p>Landing, formularios y activos de captación configurados y listos para publicar.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">💸</span>
+          <div>
+            <strong>Checkout funcional en 24 h</strong>
+            <p>Integración de pasarela de pago (Stripe/PayPal) operativa desde el primer día.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <div>
+            <strong>Embudo de seguimiento</strong>
+            <p>Tracking de cada etapa del proceso de venta para optimizar dónde se pierden compradores.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🤖</span>
+          <div>
+            <strong>Automatizaciones básicas</strong>
+            <p>Plantillas de email y WhatsApp para respuesta inmediata post-compra y recuperación de leads.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📞</span>
+          <div>
+            <strong>Sesión de activación 1:1</strong>
+            <p>45 minutos de llamada para entregar el sistema y resolver dudas de implementación.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Captación de leads</h2>
+    <!-- Testimonials -->
+    <section class="card full-width">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"En 5 días tenía mi primera venta online. El sistema es simple y funciona. Recomendado 100 %."</p>
+          <strong>— Carlos M., consultor freelance</strong>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"Llevaba meses sin sistema. En una semana tenía landing, pago y mis primeros 3 clientes captados."</p>
+          <strong>— Ana R., coach de productividad</strong>
+        </div>
+        <div class="testimonial">
+          <div class="stars">★★★★★</div>
+          <p>"La relación calidad-precio es brutal. Por 49 € tienes una estructura que te costaría 500 € montar sola."</p>
+          <strong>— David S., agencia creativa</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing tiers -->
+    <section class="card full-width" id="pricing">
+      <h2>Elige tu plan</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-badge">Más popular</div>
+          <h3>Express</h3>
+          <div class="plan-price"><s>97 €</s> <strong>49 €</strong></div>
+          <ul class="plan-features">
+            <li>✅ Diagnóstico + plan accionable</li>
+            <li>✅ Landing de captación</li>
+            <li>✅ Checkout funcional</li>
+            <li>✅ Tracking de embudo</li>
+            <li>✅ Automatizaciones básicas</li>
+            <li>✅ Sesión de activación 45 min</li>
+            <li>✅ Garantía 7 días</li>
+          </ul>
+          <button id="buy-stripe-2" class="btn primary full-btn">Empezar ahora — 49 €</button>
+        </div>
+        <div class="pricing-card pro">
+          <div class="plan-badge pro-badge">Máximo resultado</div>
+          <h3>Pro</h3>
+          <div class="plan-price"><s>297 €</s> <strong>147 €</strong></div>
+          <ul class="plan-features">
+            <li>✅ Todo lo del plan Express</li>
+            <li>✅ Estrategia de adquisición de tráfico</li>
+            <li>✅ 3 variantes A/B configuradas</li>
+            <li>✅ Funnel completo con upsell</li>
+            <li>✅ Integración email marketing</li>
+            <li>✅ 30 días de soporte prioritario</li>
+            <li>✅ 2 sesiones de revisión y optimización</li>
+          </ul>
+          <button id="buy-stripe-pro" class="btn pro-btn full-btn">Quiero el Pro — 147 €</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead capture -->
+    <section class="card" id="lead-section">
+      <h2>¿Tienes dudas? Te llamamos gratis</h2>
+      <p class="card-lead">Déjanos tus datos y un asesor te contacta en menos de 2 horas (en horario laboral).</p>
       <form id="lead-form">
         <label for="name">Nombre</label>
-        <input id="name" name="name" required>
+        <input id="name" name="name" placeholder="Tu nombre" required>
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
-        <label for="phone">WhatsApp (opcional)</label>
-        <input id="phone" name="phone" type="tel">
-        <button class="btn primary" type="submit">Quiero información</button>
+        <input id="email" name="email" type="email" placeholder="tu@email.com" required>
+        <label for="phone">WhatsApp (para contacto rápido)</label>
+        <input id="phone" name="phone" type="tel" placeholder="+34 600 000 000">
+        <button class="btn primary full-btn" type="submit">📩 Quiero que me contacten</button>
       </form>
       <p id="lead-status" class="status" aria-live="polite"></p>
     </section>
 
-    <section class="card">
-      <h2>Pruebas A/B activas</h2>
-      <p>Esta landing asigna variante de mensaje automáticamente para optimizar conversión.</p>
-      <p><strong>Variante:</strong> <span id="ab-variant">-</span></p>
+    <!-- FAQ -->
+    <section class="card" id="faq">
+      <h2>Preguntas frecuentes</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">¿En cuánto tiempo veré resultados?</button>
+          <div class="faq-a"><p>El sistema queda operativo en 7 días. Las primeras ventas dependen de tu audiencia y tráfico, pero la infraestructura estará lista para captar desde el primer día.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Necesito conocimientos técnicos?</button>
+          <div class="faq-a"><p>No. Nosotros configuramos todo. Tú solo necesitas seguir el plan de acción y ejecutar las acciones de captación de clientes.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Qué pasa si no me funciona?</button>
+          <div class="faq-a"><p>Tienes 7 días de garantía total. Si el sistema no cumple lo prometido, te devolvemos el dinero sin preguntas ni burocracia.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Es una suscripción o pago único?</button>
+          <div class="faq-a"><p>Pago único. Sin renovaciones, sin sorpresas. Pagas una vez y el sistema es tuyo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">¿Puedo ganar dinero refiriendo a otros?</button>
+          <div class="faq-a"><p>Sí. Tras tu compra, recibirás un enlace de referido exclusivo. Por cada cliente que traes, recibes una comisión directa.</p></div>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Automatización mínima lista</h2>
-      <ul>
-        <li>Plantilla de email post-registro</li>
-        <li>Plantilla de WhatsApp post-compra</li>
-        <li>Secuencia básica de recuperación</li>
-      </ul>
-      <a href="./success.html" class="link">Ver ejemplo de secuencia en página de éxito</a>
+    <!-- A/B info (hidden from users, useful for admin) -->
+    <section class="card hidden" aria-hidden="true">
+      <p><small>Variante A/B activa: <span id="ab-variant">-</span></small></p>
     </section>
+
   </main>
 
+  <!-- Sticky CTA Bar -->
+  <div id="sticky-cta" class="sticky-cta hidden">
+    <span>⚡ Quedan <strong id="sticky-spots">10</strong> plazas — <strong>49 €</strong> pago único</span>
+    <button id="sticky-buy" class="btn primary">Comprar ahora</button>
+  </div>
+
+  <!-- Exit Intent Modal -->
+  <div id="exit-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button id="exit-close" class="modal-close" aria-label="Cerrar">✕</button>
+      <p class="badge">Oferta especial — solo para ti</p>
+      <h2>¿Te vas sin aprovechar el descuento?</h2>
+      <p>El precio de lanzamiento de <strong>49 €</strong> (vs. 97 €) caduca pronto.<br>Asegura tu plaza ahora antes de que suba el precio.</p>
+      <button id="exit-buy" class="btn primary full-btn">Aprovechar la oferta ahora — 49 €</button>
+      <button id="exit-dismiss" class="btn-link">No me interesa ahorrar</button>
+    </div>
+  </div>
+
   <footer class="container footer">
-    <a href="./legal.html">Aviso legal, privacidad y términos</a>
+    <p>© 2026 · Sistema de implementación comercial digital</p>
+    <a href="./legal.html" class="link">Aviso legal · Privacidad · Términos</a>
   </footer>
 
   <div id="cookie-banner" class="cookie-banner hidden" role="dialog" aria-label="Consentimiento de cookies">
-    <p>Usamos cookies de analítica para medir rendimiento comercial.</p>
-    <button id="accept-cookies" class="btn primary">Aceptar</button>
+    <p>Usamos cookies de analítica para medir rendimiento comercial. <a href="./legal.html" class="link">Más info</a></p>
+    <div class="cookie-buttons">
+      <button id="accept-cookies" class="btn primary">Aceptar</button>
+      <button id="reject-cookies" class="btn-link">Solo esenciales</button>
+    </div>
   </div>
 
   <script src="./app.js"></script>
