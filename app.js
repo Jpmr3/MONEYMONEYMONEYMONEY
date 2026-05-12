@@ -1,10 +1,10 @@
 const CONFIG = {
-  STRIPE_PAYMENT_LINK: "https://buy.stripe.com/test_replace_me",
+  STRIPE_PAYMENT_LINK: "https://buy.stripe.com/cNiaEWfy67UB7UZ02paZi09",
   STRIPE_REFERENCE_PARAM: "client_reference_id",
-  STRIPE_PRO_LINK: "https://buy.stripe.com/test_replace_me_pro",
+  STRIPE_PRO_LINK: "https://buy.stripe.com/dRm28qadM8YF7UZ6qNaZi0a",
   PAYPAL_PAYMENT_LINK: "https://www.paypal.com/paypalme/replace_me",
   LEAD_ENDPOINT: "https://formspree.io/f/replace_me",
-  WHATSAPP_NUMBER: "replace_me",  // e.g. "34600000000" — sin + ni espacios
+  WHATSAPP_NUMBER: "34652334294",  // e.g. "34600000000" — sin + ni espacios
   WHATSAPP_TEMPLATE:
     "Hola, ya hice la compra del servicio. Comparto comprobante y espero siguientes pasos.",
   EMAIL_TEMPLATE: `Asunto: Bienvenida y activación de tu servicio
