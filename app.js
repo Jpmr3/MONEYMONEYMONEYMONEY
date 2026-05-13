@@ -3,6 +3,8 @@ const CONFIG = {
   STRIPE_REFERENCE_PARAM: "client_reference_id",
   STRIPE_PRO_LINK: "https://buy.stripe.com/test_replace_me_pro",
   PAYPAL_PAYMENT_LINK: "https://www.paypal.com/paypalme/replace_me",
+  PAYPAL_RECIPIENT_EMAIL: "comosellamabalacuenta@gmail.com",
+  PAYPAL_ITEM_NAME: "Implementación Comercial Express",
   LEAD_ENDPOINT: "https://formspree.io/f/replace_me",
   WHATSAPP_NUMBER: "replace_me",  // e.g. "34600000000" — sin + ni espacios
   WHATSAPP_TEMPLATE:
@@ -34,6 +36,7 @@ function warnIfPlaceholderConfig() {
     ["STRIPE_PAYMENT_LINK", CONFIG.STRIPE_PAYMENT_LINK],
     ["STRIPE_PRO_LINK", CONFIG.STRIPE_PRO_LINK],
     ["PAYPAL_PAYMENT_LINK", CONFIG.PAYPAL_PAYMENT_LINK],
+    ["PAYPAL_RECIPIENT_EMAIL", CONFIG.PAYPAL_RECIPIENT_EMAIL],
     ["LEAD_ENDPOINT", CONFIG.LEAD_ENDPOINT],
     ["WHATSAPP_NUMBER", CONFIG.WHATSAPP_NUMBER]
   ];
@@ -45,10 +48,12 @@ function warnIfPlaceholderConfig() {
 }
 
 function isPlaceholderValue(value) {
-  const asString = String(value);
+  const asString = String(value).trim();
+  if (!asString) return true;
   if (asString === "https://buy.stripe.com/test_replace_me") return true;
   if (asString === "https://buy.stripe.com/test_replace_me_pro") return true;
   if (asString === "https://www.paypal.com/paypalme/replace_me") return true;
+  if (asString === "replace_me@example.com") return true;
   if (asString === "https://formspree.io/f/replace_me") return true;
   if (asString === "replace_me") return true;
   try {
@@ -66,6 +71,23 @@ function resolveCheckoutUrl(rawUrl) {
   } catch {
     return null;
   }
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
+}
+
+function buildPaypalCheckoutUrl(transaction) {
+  const recipient = String(CONFIG.PAYPAL_RECIPIENT_EMAIL || "").trim();
+  if (!recipient || isPlaceholderValue(recipient) || !isValidEmail(recipient)) return null;
+  const url = new URL("https://www.paypal.com/cgi-bin/webscr");
+  url.searchParams.set("cmd", "_xclick");
+  url.searchParams.set("business", recipient);
+  url.searchParams.set("item_name", CONFIG.PAYPAL_ITEM_NAME || "Implementación Comercial Express");
+  url.searchParams.set("amount", String(CONFIG.PRICE));
+  url.searchParams.set("currency_code", CONFIG.CURRENCY || "EUR");
+  url.searchParams.set("custom", transaction.id);
+  return url.toString();
 }
 
 function track(eventName, payload = {}) {
@@ -207,12 +229,20 @@ function initCheckoutButtons() {
   }
 
   function handlePaypal() {
-    if (!resolveCheckoutUrl(CONFIG.PAYPAL_PAYMENT_LINK)) {
+    const directPaypalUrl = resolveCheckoutUrl(CONFIG.PAYPAL_PAYMENT_LINK);
+    if (directPaypalUrl) {
+      registerCheckoutIntent("paypal");
+      window.location.href = directPaypalUrl.toString();
+      return;
+    }
+
+    const tx = registerCheckoutIntent("paypal");
+    const generatedPaypalUrl = buildPaypalCheckoutUrl(tx);
+    if (!generatedPaypalUrl) {
       alert("El sistema de pago PayPal no está disponible en este momento. Contacta con soporte.");
       return;
     }
-    registerCheckoutIntent("paypal");
-    window.location.href = CONFIG.PAYPAL_PAYMENT_LINK;
+    window.location.href = generatedPaypalUrl;
   }
 
   function handleStripePro() {
@@ -654,4 +684,3 @@ if (window.location.pathname.endsWith("success.html")) {
   warnIfPlaceholderConfig();
   initLanding();
 }
-

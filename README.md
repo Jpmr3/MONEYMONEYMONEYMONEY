@@ -42,6 +42,8 @@ Edita el objeto `CONFIG` al inicio del archivo:
 | `STRIPE_PAYMENT_LINK` | Enlace de pago Stripe (plan Express) | `https://buy.stripe.com/abc123` |
 | `STRIPE_PRO_LINK` | Enlace de pago Stripe (plan Pro) | `https://buy.stripe.com/xyz456` |
 | `PAYPAL_PAYMENT_LINK` | Enlace de pago PayPal | `https://www.paypal.com/paypalme/tunombre` |
+| `PAYPAL_RECIPIENT_EMAIL` | Email de la cuenta PayPal para cobro directo (fallback) | `tu-cuenta@paypal.com` |
+| `PAYPAL_ITEM_NAME` | Nombre del producto que verá el comprador en PayPal | `Implementación Comercial Express` |
 | `LEAD_ENDPOINT` | Endpoint para captar leads (Formspree, Make, Zapier...) | `https://formspree.io/f/abcdefg` |
 | `WHATSAPP_NUMBER` | Número de WhatsApp sin `+` ni espacios | `34600000000` |
 | `PRICE` | Precio del plan Express en EUR | `49` |
@@ -49,7 +51,8 @@ Edita el objeto `CONFIG` al inicio del archivo:
 | `URGENCY_HOURS` | Duración del countdown en horas | `72` |
 | `INITIAL_SPOTS` | Plazas visibles al inicio | `10` |
 
-> **Importante:** Reemplaza todos los valores `replace_me` / `test_replace_me` antes de publicar.
+> **Importante:** Reemplaza todos los valores `replace_me` / `test_replace_me` antes de publicar.  
+> Si `PAYPAL_PAYMENT_LINK` no está configurado, el sistema genera un checkout PayPal automáticamente usando `PAYPAL_RECIPIENT_EMAIL`.
 
 ### 2. Personaliza el contenido
 
