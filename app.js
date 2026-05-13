@@ -3,7 +3,7 @@ const CONFIG = {
   STRIPE_REFERENCE_PARAM: "client_reference_id",
   STRIPE_PRO_LINK: "https://buy.stripe.com/test_replace_me_pro",
   PAYPAL_PAYMENT_LINK: "https://www.paypal.com/paypalme/replace_me",
-  PAYPAL_RECIPIENT_EMAIL: "comosellamabalacuenta@gmail.com",
+  PAYPAL_RECIPIENT_EMAIL: "replace_me@example.com",
   PAYPAL_ITEM_NAME: "Implementación Comercial Express",
   LEAD_ENDPOINT: "https://formspree.io/f/replace_me",
   WHATSAPP_NUMBER: "replace_me",  // e.g. "34600000000" — sin + ni espacios
@@ -80,12 +80,18 @@ function isValidEmail(value) {
 function buildPaypalCheckoutUrl(transaction) {
   const recipient = String(CONFIG.PAYPAL_RECIPIENT_EMAIL || "").trim();
   if (!recipient || isPlaceholderValue(recipient) || !isValidEmail(recipient)) return null;
+  const itemName = String(CONFIG.PAYPAL_ITEM_NAME || "").trim();
+  if (!itemName) return null;
+  const amount = Number(CONFIG.PRICE);
+  if (!Number.isFinite(amount) || amount <= 0) return null;
+  const currency = String(CONFIG.CURRENCY || "").trim().toUpperCase();
+  if (!/^[A-Z]{3}$/.test(currency)) return null;
   const url = new URL("https://www.paypal.com/cgi-bin/webscr");
   url.searchParams.set("cmd", "_xclick");
   url.searchParams.set("business", recipient);
-  url.searchParams.set("item_name", CONFIG.PAYPAL_ITEM_NAME || "Implementación Comercial Express");
-  url.searchParams.set("amount", String(CONFIG.PRICE));
-  url.searchParams.set("currency_code", CONFIG.CURRENCY || "EUR");
+  url.searchParams.set("item_name", itemName);
+  url.searchParams.set("amount", amount.toFixed(2));
+  url.searchParams.set("currency_code", currency);
   url.searchParams.set("custom", transaction.id);
   return url.toString();
 }
